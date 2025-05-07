@@ -1,0 +1,23 @@
+{
+  "name": "216-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UlugbekYusupov/216-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/UlugbekYusupov/216-backend/issues"
+  },
+  "homepage": "https://github.com/UlugbekYusupov/216-backend#readme",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2"
+  }
+}

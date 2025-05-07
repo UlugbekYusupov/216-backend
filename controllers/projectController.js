@@ -29,3 +29,30 @@ exports.getProjects = (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
+
+exports.getProject = (req, res) => {
+  const { id } = req.params;
+  try {
+    const project = projectService.getProjectById(id);
+    if (project) {
+      return res.status(200).json(project);
+    }
+    return res.status(404).json({ messag: "User not found!" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+exports.deleteProject = (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const isDeleted = projectService.deleteProject(id);
+    if (isDeleted) {
+      return res.status(200).json({ message: "Project deleted successfully!" });
+    }
+    return res.status(400).json({ message: "Project deletion failed!" });
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};

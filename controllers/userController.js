@@ -22,12 +22,12 @@ exports.login = (req, res) => {
       .status(400)
       .json({ message: "Please fill all required fields!" });
   }
-  const foundUser = userService.login(email, password);
+  const { token, foundUser } = userService.login(email, password);
 
   if (!foundUser) {
     return res.status(404).json({ message: "Such user Not found!" });
   }
-  return res.status(200).json({ message: "Successfully logged in" });
+  return res.status(200).json({ token, message: "Successfully logged in" });
 };
 
 exports.getUsers = (req, res) => {

@@ -1,5 +1,6 @@
 const { v4: uuidv4 } = require("uuid");
 const { users } = require("../config/database");
+const jwt = require("jsonwebtoken");
 
 exports.register = (username, email, password) => {
   const foundUser = users.find((user) => user.username === username);
@@ -16,11 +17,17 @@ exports.register = (username, email, password) => {
   return { ...user };
 };
 
+const secret_key = "pdp_secret_key";
+
 exports.login = (email, password) => {
   const foundUser = users.find(
     (user) => user.email === email && user.password === password
   );
-  return foundUser;
+  if (!foundUser) {
+    throw new Error("User not found!");
+  }
+  const token = jwt.sign({ email, password }, secret_key, { expiresIn: "1h" });
+  return { token, foundUser };
 };
 
 exports.getAllUsers = () => {

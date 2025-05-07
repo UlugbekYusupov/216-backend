@@ -106,6 +106,7 @@ function handleLogin() {
     email: inputs[1].value,
     password: inputs[2].value,
   };
+
   fetch("http://localhost:3000/auth/login", {
     headers: { "Content-Type": "application/json" },
     method: "POST",
@@ -113,8 +114,7 @@ function handleLogin() {
   })
     .then((res) => res.json())
     .then((data) => {
-      alert(data.message);
-      window.location.href = "/frontend/dashboard/dashboard.html";
+      console.log(data);
     });
 }
 
