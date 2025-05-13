@@ -12,6 +12,8 @@ exports.register = (username, email, password) => {
     username,
     email,
     password,
+    ownedProjects: [],
+    participatedProjects: [],
   };
   users.push(user);
   return { ...user };

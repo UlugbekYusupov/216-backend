@@ -27,7 +27,9 @@ exports.login = (req, res) => {
   if (!foundUser) {
     return res.status(404).json({ message: "Such user Not found!" });
   }
-  return res.status(200).json({ token, message: "Successfully logged in" });
+  return res
+    .status(200)
+    .json({ token, id: foundUser.id, message: "Successfully logged in" });
 };
 
 exports.getUsers = (req, res) => {

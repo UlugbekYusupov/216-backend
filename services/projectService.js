@@ -1,7 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
-const { projects } = require("../config/database");
+const { projects, users } = require("../config/database");
 
 exports.create = (title, description, deadline, status, ownerId) => {
+  const user = users.find((user) => user.id === ownerId);
   const project = {
     id: uuidv4(),
     title,
@@ -11,16 +12,17 @@ exports.create = (title, description, deadline, status, ownerId) => {
     ownerId,
     members: [],
   };
-  projects.push(project);
+  user.ownedProjects.push(project);
   return { ...project };
 };
 
 exports.getAllProjects = () => {
-  return projects;
+  return users.ownedProjects;
 };
 
 exports.getProjectById = (id) => {
-  const project = projects.find((project) => project.id === id);
+  const user = users.find((user) => user.id === ownerId);
+  const project = user.ownedProjects.find((project) => project.id === id);
   if (!project) {
     throw Error("Project not found !");
   }
@@ -28,10 +30,11 @@ exports.getProjectById = (id) => {
 };
 
 exports.deleteProject = (id) => {
-  const index = projects.findIndex((project) => project.id === id);
+  const user = users.find((user) => user.id === ownerId);
+  const index = user.ownedProjects.findIndex((project) => project.id === id);
   if (index === -1) {
     throw Error("Project not found !");
   }
-  projects.splice(index, 1);
+  user.ownedProjects.splice(index, 1);
   return true;
 };

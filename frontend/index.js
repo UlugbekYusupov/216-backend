@@ -114,7 +114,12 @@ function handleLogin() {
   })
     .then((res) => res.json())
     .then((data) => {
+      alert(data.message);
       console.log(data);
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("id", data.id);
+      window.location.href = "/frontend/dashboard/layout.html";
     });
 }
 
